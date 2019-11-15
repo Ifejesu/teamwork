@@ -13,10 +13,12 @@ const normalizePort = val => {
     return false;
 };
 
+//returns a valid port
 const port = normalizePort(process.env.PORT || 3000);
 
 app.set('port', port);
 
+//checks for various errors and handles them 
 const errorHandler = error => {
     if (error.syscall !== 'listen') {
         throw error;
@@ -43,6 +45,8 @@ const errorHandler = error => {
 const server = http.createServer(app);
 
 server.on('error', errorHandler);
+
+//a "listening" event listener
 server.on('listening', () => {
     const address = server.address();
     const bind = typeof address === 'string' ? 'pipe' + address : 'port: ' + port;
